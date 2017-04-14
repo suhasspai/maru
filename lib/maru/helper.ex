@@ -37,21 +37,21 @@ defmodule Maru.Helper do
 
   Defined helper like this:
 
-    defmodule Authorization do
-      use Maru.Helper
+      defmodule Authorization do
+        use Maru.Helper
 
-      defmacro current_user do
-        quote do
-          var!(conn).assigns[:current_user]
+        defmacro current_user do
+          quote do
+            var!(conn).assigns[:current_user]
+          end
+        end
+
+        defmacro current_user! do
+          quote do
+            current_user || raise Unauthorized
+          end
         end
       end
-
-      defmacro current_user! do
-        quote do
-          current_user || raise Unauthorized
-        end
-      end
-    end
 
   And use it within Maru.Router like this:
 
